@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub User Profile</title>
+    <style>
+        body {
+            background-color: #212121;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        img {
+            border-radius: 50%; /* Makes the image circular */
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="img">
+            <img id="avatar" src="" alt="User Avatar">
+        </div>
+        <div class="followers">
+            <h2 id="followerCount"></h2>
+        </div>
+    </div>
+
+    <script>
+        const requesturl = 'https://api.github.com/users/hiteshchoudhary';
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET", requesturl);
+        xhr.onreadystatechange = function() {
+            console.log(xhr.readyState);
+            const data = JSON.parse(this.responseText);
+            console.log(data.avatar_url); // Log the avatar_url to the console
+
+            // Set the image source and follower count
+            document.getElementById('avatar').src = data.avatar_url;
+            document.getElementById('followerCount').innerText = `${data.followers} Followers`;
+            
+        }
+        xhr.send();
+    </script>
+</body>
+</html>
